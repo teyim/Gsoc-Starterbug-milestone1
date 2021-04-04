@@ -5,6 +5,18 @@ const page1=document.getElementById('page1');
 const page2=document.getElementById('page2');
 const page3=document.getElementById('page3');
 
+window.addEventListener('load',()=>{
+    if('serviceWorker' in navigator){
+        try {
+          navigator.serviceWorker.register('serviceWorker.js');
+          console.log("Service Worker Registered");
+        } catch (error) {
+          console.log("Service Worker Registration Failed");
+        }
+      }
+})
+
+
 const updateTapState=(tap)=>{
 switch (tap) {
     case 'tap1':
