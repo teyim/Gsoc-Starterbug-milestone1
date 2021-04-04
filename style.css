@@ -1,0 +1,61 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI';
+}
+.header
+{
+    height: 10vh;
+    background-color: #323EBE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header>div
+{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+}
+.header>div>h4
+{
+    color: white;
+    cursor: pointer;
+}
+.header>div>h4:hover{
+    border-bottom: 2px solid white;
+}
+.active
+{
+    border-bottom: 2px solid white;
+}
+
+#page1,#page2,#page3
+{
+    width: 100wv;
+    height: 90vh;
+    text-align: center;
+    background-color: #EFEFF5;
+}
+.hide
+{
+    display:none;
+}
+
+@media only screen and (max-width: 820px) {
+.header>div
+{
+    width: 80%;
+    
+}
+}
+@media only screen and (max-width: 500px) {
+    .header>div
+    {
+        width: 100%;
+     
+    }
+    }
