@@ -61,9 +61,8 @@ tap3.addEventListener('click',()=>{
 
 // The ID of the extension we want to talk to.
 var editorExtensionId = "nebpageekkhnobnakekaclbnmlbegpfk";
-const url="www.google.com";
 // Make a simple request:
-chrome.runtime.sendMessage(editorExtensionId,{openUrlInEditor: url},
+chrome.runtime.sendMessage(editorExtensionId,{openUrlInEditor: "www.google.com"},null,
   function(response) {
     if (!response.success)
       handleError(url);
