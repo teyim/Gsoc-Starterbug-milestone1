@@ -39,3 +39,6 @@ self.addEventListener('fetch', event => {
         event.respondWith(newtorkFirst(req));
     }
 });
+
+
+
