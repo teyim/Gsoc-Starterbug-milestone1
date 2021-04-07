@@ -15,7 +15,6 @@ async function cacheFirst(req){
 
 async function newtorkFirst(req){
     const cache = await caches.open('dynamic-cache');
-
     try {
         const res = await fetch(req);
         cache.put(req, res.clone());
