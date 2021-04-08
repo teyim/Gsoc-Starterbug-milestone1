@@ -4,17 +4,29 @@ const tap3=document.getElementById('tap3');
 const page1=document.getElementById('page1');
 const page2=document.getElementById('page2');
 const page3=document.getElementById('page3');
+const arcNameText=document.getElementById('archName');
+const processorText=document.getElementById('processors');
+const featuresText=document.getElementById('features');
+const modelNameText=document.getElementById('modelName');
 
 
 // The ID of the extension we want to talk to.
 var editorExtensionId = "nebpageekkhnobnakekaclbnmlbegpfk";
+let systemData={} 
+
+const updateDom=()=>{
+arcNameText.innerText=systemData.systemInfo.archName;
+featuresText.innerText=systemData.systemInfo.features.join(',');
+modelNameText.innerText=systemData.systemInfo.modelName;
+processorText.innerText=systemData.systemInfo.numOfProcessors;
+}
 
 function onAccessApproved(systemInfo) {
-    console.log(systemInfo);
+    systemData={...systemInfo}
     if (!systemInfo) {
-    console.log("Access rejected.");
     return;
     }
+    updateDom();
 }
 
 const sendMessage=()=>{
@@ -27,6 +39,7 @@ const sendMessage=()=>{
             onAccessApproved
           );
         }
+       
     }
  
 
@@ -34,7 +47,6 @@ window.addEventListener('load',()=>{
     if('serviceWorker' in navigator){
         try {
           navigator.serviceWorker.register('serviceWorker.js');
-          console.log("Service Worker Registered");
         } catch (error) {
           console.log("Service Worker Registration Failed");
         }
@@ -42,7 +54,7 @@ window.addEventListener('load',()=>{
       sendMessage();
       setInterval(() => {
         sendMessage();
-      }, 32000);
+      }, 60000);
 })
 
 
