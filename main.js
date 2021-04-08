@@ -5,6 +5,31 @@ const page1=document.getElementById('page1');
 const page2=document.getElementById('page2');
 const page3=document.getElementById('page3');
 
+
+// The ID of the extension we want to talk to.
+var editorExtensionId = "nebpageekkhnobnakekaclbnmlbegpfk";
+
+function onAccessApproved(systemInfo) {
+    console.log(systemInfo);
+    if (!systemInfo) {
+    console.log("Access rejected.");
+    return;
+    }
+}
+
+const sendMessage=()=>{
+      // Website code
+      // This will only be true if some extension allowed the page to connect
+      if(chrome && chrome.runtime && chrome.runtime.sendMessage) {
+          chrome.runtime.sendMessage(
+            editorExtensionId,
+            {greeting: "getInfo"},
+            onAccessApproved
+          );
+        }
+    }
+ 
+
 window.addEventListener('load',()=>{
     if('serviceWorker' in navigator){
         try {
@@ -14,6 +39,10 @@ window.addEventListener('load',()=>{
           console.log("Service Worker Registration Failed");
         }
       }
+      sendMessage();
+      setInterval(() => {
+        sendMessage();
+      }, 32000);
 })
 
 
@@ -59,11 +88,3 @@ tap3.addEventListener('click',()=>{
     updateTapState('tap3')
 })
 
-// The ID of the extension we want to talk to.
-var editorExtensionId = "nebpageekkhnobnakekaclbnmlbegpfk";
-// Make a simple request:
-chrome.runtime.sendMessage(editorExtensionId,{openUrlInEditor: "www.google.com"},null,
-  function(response) {
-    if (!response.success)
-      handleError(url);
-  });
